@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Algorithmic</title>
+</head>
+
+<body>
+    <h1>Merge Arrays</h1>
+
+    <label for="input1">Input 1:</label>
+    <input type="text" id="input1" placeholder="Example: 1, 2, 3">
+    <br>
+
+    <label for="input2">Input 2:</label>
+    <input type="text" id="input2" placeholder="Example: 4, 5, 6">
+    <br><br>
+
+    <button id="mergeButton">Merge</button>
+    <br><br>
+
+    <div id="result"></div>
+
+    <script>
+
+        document.getElementById("mergeButton").addEventListener('click', function () {
+            event.preventDefault();
+            if (document.getElementById("input1").value.trim() === "" || document.getElementById("input2").value.trim() === "") {
+                document.getElementById('result').innerText = "Both inputs are necessary!";
+            } else {
+                let input1 = (document.getElementById("input1").value).split(',').map(Number);
+                let input2 = (document.getElementById("input2").value).split(',').map(Number);
+                let mergedArrays = joinArrays(input1, input2);
+
+                document.getElementById('result').innerText = mergedArrays;
+            }
+        })
+
+        function joinArrays(input1, input2) {
+            let input1Length = input1.length;
+            let input2Length = input2.length;
+
+            let maxLength = Math.min(input1Length, input2Length);
+
+            for (let i = 0; i < maxLength; i++) {
+                if (input1.slice(input1Length - maxLength + i).join(',') === input2.slice(0, maxLength - i).join(',')) {
+                    return input1.concat(input2.slice(maxLength - i))
+                }
+            }
+
+            return input1.concat(input2);
+        }
+    </script>
+</body>
+
+
+
+
+
+</html>
